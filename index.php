@@ -164,7 +164,7 @@
                     <div>
                     <div class="numbers">
                         <?php
-                        $sql = "SELECT COUNT(*) as order_count FROM crud";
+                        $sql = "SELECT COUNT(*) as order_count FROM menu";
 
                         // Execute the query
                         $result = $conn->query($sql);

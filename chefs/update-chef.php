@@ -90,7 +90,7 @@ if (isset($_POST["submit"])) {
     $row = mysqli_fetch_assoc($result);
     ?>
 
-    <div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center">
       <form action="" method="post" style="width:50vw; min-width:300px;">
         <div class="row mb-3">
           <div class="col">
