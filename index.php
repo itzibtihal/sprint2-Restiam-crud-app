@@ -83,11 +83,11 @@
                 </li>
 
                 <li>
-                    <a href="index">
+                    <a href="client.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
-                        <span class="title">Settings</span>
+                        <span class="title">Clients</span>
                     </a>
                 </li>
 
@@ -127,7 +127,7 @@
                     <div>
                     <div class="numbers">
                         <?php
-                        $sql = "SELECT COUNT(*) as order_count FROM crud";
+                        $sql = "SELECT COUNT(*) as order_count FROM `order`";
 
                         // Execute the query
                         $result = $conn->query($sql);
@@ -238,29 +238,29 @@
                     <div>
                     <div class="numbers">$
                         <?php
-                        $sql = "SELECT COUNT(*) as order_count FROM crud";
-
-                        // Execute the query
-                        $result = $conn->query($sql);
-
-                        // Check if the query was successful
-                        if ($result) {
-                            // Fetch the result as an associative array
-                            $row = $result->fetch_assoc();
-
-                            // Access the count value
-                            $orderCount = $row['order_count'];
-
-                            // // Output the count on the front end
-                            echo "$orderCount";
-
-                            // Free the result set
-                            $result->free();
-                        } else {
-                            // Handle query error
-                            // echo "Error " ;
-                        }
-
+                         $sql = "SELECT SUM(menu.price) as total_prices FROM `order`
+                         INNER JOIN menu ON `order`.Menu_Id = menu.id";
+             
+                 // Execute the query
+                 $result = $conn->query($sql);
+             
+                 // Check if the query was successful
+                 if ($result) {
+                     // Fetch the result as an associative array
+                     $row = $result->fetch_assoc();
+             
+                     // Access the total prices value
+                     $totalPrices = $row['total_prices'];
+             
+                     // Output the total prices on the front end
+                     echo number_format($totalPrices, 2); // Format as a currency with two decimal places
+             
+                     // Free the result set
+                     $result->free();
+                 } else {
+                     // Handle query error
+                     // echo "Error ";
+                 }
                         ?>
                        </div>
                         <div class="cardName">Earning</div>
@@ -274,56 +274,62 @@
 
 <!-- ================ Order Details List ================= -->
 
-<div class="container">
-    <?php
-    if (isset($_GET["msg"])) {
-      $msg = $_GET["msg"];
-      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-      ' . $msg . '
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
-    }
-    ?>
-    <a href="Client/add-new-Client.php" class="btn btn-dark mb-3">Add New</a>
 
-    <table class="table table-hover text-center">
+<div class="container">
+ <table class="table table-hover text-center">
       <thead class="table-dark">
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">phone</th>
-          <th scope="col">address</th>
-          <th scope="col">Gender</th>
-          <th scope="col">Action</th>
+          <th scope="col">Order ID</th>
+          <th scope="col">Client Name</th>
+          <th scope="col">Address Order</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Total Price $</th>
+          <th scope="col">Shipping Agent</th>
+          <th scope="col">Agent Phone</th>
         </tr>
       </thead>
       <tbody>
-        <?php
-        $sql = "SELECT * FROM `crud`";
+      <?php
+        $sql =  $sql = "SELECT
+        `order`.id,
+        crud.first_name AS Client_name,
+        crud.address AS Address_order,
+        menu.name AS product_name,
+        menu.price AS total_price,
+        delivery.first_name AS shipping_Agent,
+        delivery.phone AS Agent_phone
+        FROM
+        `order`
+        INNER JOIN crud ON `order`.Client_Id = crud.id
+        INNER JOIN menu ON `order`.Menu_Id = menu.id
+        INNER JOIN delivery ON `order`.shippingAgent_Id = delivery.id";
+
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
+
         ?>
-          <tr>
+
+        <tr>
             <td><?php echo $row["id"] ?></td>
-            <td><?php echo $row["first_name"] ?></td>
-            <td><?php echo $row["last_name"] ?></td>
-            <td><?php echo $row["email"] ?></td>
-            <td><?php echo $row["phone"] ?></td>
-            <td><?php echo $row["address"] ?></td>
-            <td><?php echo $row["gender"] ?></td>
-            <td>
-              <a href="Client/update-client.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-              <a href="Client/delete-clients.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
-            </td>
-          </tr>
+            <td><?php echo $row["Client_name"] ?></td>
+            <td><?php echo $row["Address_order"] ?></td>
+            <td><?php echo $row["product_name"] ?></td>
+            <td><?php echo $row["total_price"] ?></td>
+            <td><?php echo $row["shipping_Agent"] ?></td>
+            <td><?php echo $row["Agent_phone"] ?></td>
+        </tr>
+
+
+
+
+
         <?php
         }
         ?>
       </tbody>
     </table>
-  </div>
+
+</div>
 
 
   <!-- Bootstrap -->

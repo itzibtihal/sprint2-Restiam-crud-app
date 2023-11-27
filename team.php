@@ -83,11 +83,11 @@
                 </li>
 
                 <li>
-                    <a href="index">
+                    <a href="client.php">
                         <span class="icon">
                             <ion-icon name="settings-outline"></ion-icon>
                         </span>
-                        <span class="title">Settings</span>
+                        <span class="title">Clients</span>
                     </a>
                 </li>
 

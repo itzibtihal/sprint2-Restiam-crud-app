@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
   $result = mysqli_query($conn, $sql);
 
   if ($result) {
-    header("Location: ../index.php?msg=Data updated successfully");
+    header("Location: ../client.php?msg=Data updated successfully");
   } else {
     echo "Failed: " . mysqli_error($conn);
   }
@@ -109,7 +109,7 @@ if (isset($_POST["submit"])) {
           <label for="female" class="form-input-label">Female</label>
         </div>  <br>
           <button type="submit" class="btn btn-success" name="submit" style="background-color: #FE7F32; border: 2px solid black">Update</button>
-          <a href="../index.php" class="btn btn-danger" style="background-color: #FE7F32; border: 2px solid black">Cancel</a>
+          <a href="../client.php" class="btn btn-danger" style="background-color: #FE7F32; border: 2px solid black">Cancel</a>
         </div>
       </form>
     </div>
