@@ -11,7 +11,7 @@ if (isset($_POST["submit"])) {
    $gender = $_POST['gender'];
    $profile = $_FILES['profile']['name'];
    $temp_name = $_FILES['profile']['tmp_name'];
-   $folder = "assets/imgs/".$profile;
+   $folder = "assets/imgs/" . $profile;
    
 
    $sql = "INSERT INTO `team`(`id`, `first_name`, `last_name`,`phone` ,`email`,`post`,`salary`, `gender`,`profile`) 
@@ -20,6 +20,7 @@ if (isset($_POST["submit"])) {
    $result = mysqli_query($conn, $sql);
 
    if ($result) {
+      move_uploaded_file($temp_name , $folder);
       header("Location: ../team.php?msg=New user created successfully");
    } else {
       echo "Failed: " . mysqli_error($conn);
@@ -129,7 +130,6 @@ if (isset($_POST["submit"])) {
 
             <div class="button-container">
                
-
                 <div class="form-group mb-3">
                <label>Post:</label>
                &nbsp;

@@ -8,7 +8,7 @@ if (isset($_POST["submit"])) {
     $reviews = $_POST['reviews'];
     $profile = $_FILES['profile']['name'];
     $temp_name = $_FILES['profile']['tmp_name'];
-    $folder = "../assets/imgs/" . $profile;
+    $folder = "assets/imgs/" . $profile;
 
 
     $sql = "INSERT INTO `menu`(`id`, `name`, `description`, `price`, `reviews`, `profile`) 
@@ -17,6 +17,7 @@ if (isset($_POST["submit"])) {
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
+        move_uploaded_file($temp_name , $folder);
         header("Location: ../menu.php?msg=New user created successfully");
     } else {
         echo "Failed: " . mysqli_error($conn);

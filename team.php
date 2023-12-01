@@ -156,22 +156,22 @@
         <?php
         $sql = "SELECT * FROM `team`";
         $result = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_row($result)) {
         ?>
           <tr>
             
-            <td><?php echo $row["first_name"] ?></td>
-            <td><?php echo $row["last_name"] ?></td>
-            <td><?php echo $row["phone"] ?></td>
-            <td><?php echo $row["email"] ?></td>
-            <td><?php echo $row["post"] ?></td>
-            <td><?php echo $row["Salary"] ?></td>
-            <td><?php echo $row["gender"] ?></td>
-            <td><img src="<?php echo $rows['profile']?>" style="max-width:40px;" class="rounded-5"></td>
+            <td><?php echo $row[1] ?></td>
+            <td><?php echo $row[2] ?></td>
+            <td><?php echo $row[3] ?></td>
+            <td><?php echo $row[4] ?></td>
+            <td><?php echo $row[5] ?></td>
+            <td><?php echo $row[6] ?></td>
+            <td><?php echo $row[7] ?></td>
+            <td><img src="assets/imgs/<?php echo $rows[8]?>" style="max-width:40px;" class="rounded-5"></td>
             
             <td>
-              <a href="chefs/update-chef.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-              <a href="chefs/delete-chef.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
+              <a href="chefs/update-chef.php?id=<?php echo $row[0] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
+              <a href="chefs/delete-chef.php?id=<?php echo $row[0] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
             </td>
           </tr>
         <?php

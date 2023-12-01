@@ -151,17 +151,17 @@
         <?php
         $sql = "SELECT * FROM `menu`";
         $result = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_row($result)) {
         ?>
           <tr>
-            <td><?php echo $row["name"] ?></td>
-            <td><?php echo $row["description"] ?></td>
-            <td><?php echo $row["price"] ?></td>
-            <td><?php echo $row["reviews"] ?></td>
-            <td><img src="<?php echo $rows['picture']?>" style="max-width:40px;" class="rounded-5"></td>
+            <td><?php echo $row[1] ?></td>
+            <td><?php echo $row[2] ?></td>
+            <td><?php echo $row[3] ?></td>
+            <td><?php echo $row[5] ?></td>
+            <td><img src="assets/imgs/<?php echo $row[4]?>" style="max-width:40px;" class="rounded-5"></td>
             <td>
-              <a href="menu/update-menu.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-              <a href="menu/delete-menu.php?id=<?php echo $row["id"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
+              <a href="menu/update-menu.php?id=<?php echo $row[0] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
+              <a href="menu/delete-menu.php?id=<?php echo $row[0] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
             </td>
           </tr>
         <?php

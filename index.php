@@ -290,7 +290,7 @@
       </thead>
       <tbody>
       <?php
-        $sql =  $sql = "SELECT
+         $sql = "SELECT
         `order`.id,
         crud.first_name AS Client_name,
         crud.address AS Address_order,
